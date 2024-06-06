@@ -43,7 +43,12 @@ function Home() {
   return (
     <div className="relative h-screen">
       <Navbar />
-      <GlassyBox loading={loading} display={movies?.results[currentIndex]} />
+      <GlassyBox
+        loading={loading}
+        display={movies?.results[currentIndex]}
+        forward={handleNext}
+        previous={handlePrev}
+      />
     </div>
   );
 }

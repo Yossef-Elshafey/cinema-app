@@ -7,7 +7,7 @@ function Navbar() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ ease: "easeOut", duration: 1 }}
-      className="min-h-20  max-h-20 border-b border-b-white text-white flex justify-between"
+      className="min-h-20  max-h-20 text-white flex justify-between"
     >
       <motion.ul
         className="f-horizontal"
