@@ -1,37 +1,25 @@
-import React, { useState } from "react";
-import { GlassyBoxProps } from "../types/MoviesRes";
+import { GlassyBoxProps } from "../types/Types";
 import { motion } from "framer-motion";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function GlassyBox({ loading, display, forward, previous }: GlassyBoxProps) {
-  const [key, setKey] = useState(0);
-
-  const handleForward = () => {
-    forward();
-    setKey(key + 1);
-  };
-  const handlePrev = () => {
-    previous();
-    setKey(key - 1);
-  };
-
   return (
     <div className="h-[calc(100vh-7rem)] mt-4">
       <motion.div
-        key={key} // any change value to apply the animation again or rerender
+        key={display?.id} // Rerender the component with motion.div animation
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ ease: "linear", duration: 1 }}
+        transition={{ ease: "easeIn", duration: 1 }}
         className="text-white h-full group rounded-xl relative"
         id={`${display?.id}`}
       >
         <FaArrowCircleRight
-          onClick={handleForward}
+          onClick={forward}
           className="text-white text-2xl absolute cursor-pointer -right-10 top-1/2 -translate-y-1/2 z-40"
         />
         <FaArrowCircleLeft
-          onClick={handlePrev}
+          onClick={previous}
           className="text-white text-2xl absolute cursor-pointer -left-10 top-1/2 -translate-y-1/2 z-40"
         />
         {loading && <div className="text-white">Loading...</div>}
@@ -49,8 +37,10 @@ function GlassyBox({ loading, display, forward, previous }: GlassyBoxProps) {
           <p className="text-yellow-500">Hall: {display?.hall_id.name}</p>
           {display?.avaliable && (
             <Link
-              to={`${display?.slug}`}
-              className="bg-yellow-500 w-fit self-end p-2 rounded-md"
+              to={`/movie/${display.slug}`}
+              state={`${display.id}`}
+              itemID={`${display.id}`}
+              className="bg-yellow-500 w-fit self-end p-2 rounded-md font-bold"
             >
               Get a seat now !
             </Link>

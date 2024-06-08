@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import { MoviesResponse } from "../types/MoviesRes";
+import { MoviesResponse } from "../../types/Types";
+
 export const useGetMovies = () => {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<MoviesResponse | null>(null);

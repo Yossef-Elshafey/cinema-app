@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useGetMovies } from "../api/useFetchMovies";
+import { useGetMovies } from "../api/movies/useFetchMovies";
 import GlassyBox from "../component/GlassyBox";
 import Navbar from "../component/Navbar";
 

@@ -26,3 +26,8 @@ export interface GlassyBoxProps {
   forward: () => void;
   previous: () => void;
 }
+
+export interface SeatsProps {
+  max: number;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
