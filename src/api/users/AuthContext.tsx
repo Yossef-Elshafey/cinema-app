@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setIsLogged(false);
     setTok("");
-    setCookie("auth_user", "none", { path: "/" });
+    setCookie("auth_user", "none", { path: "/", sameSite: "lax" });
   };
 
   return (

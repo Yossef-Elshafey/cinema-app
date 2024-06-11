@@ -70,3 +70,8 @@ export interface BeforeActionProps {
   prompt: boolean;
   setPrompt: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface SigninData {
+  email: string;
+  password: string;
+}

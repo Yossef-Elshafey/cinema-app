@@ -32,4 +32,7 @@ body {
   .input {
     @apply block w-full border outline-none bg-transparent rounded-md p-2;
   }
+  .form {
+    @apply h-screen w-full flex flex-col gap-y-4 items-center justify-center;
+  }
 }

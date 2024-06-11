@@ -28,10 +28,7 @@ function Signup() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="h-screen w-full flex flex-col gap-y-4 items-center justify-center"
-    >
+    <form onSubmit={handleSubmit} className="form">
       <label className="text-white w-1/2">
         <p className="text-red-500 text-start">{error?.username}</p>
         First Name
