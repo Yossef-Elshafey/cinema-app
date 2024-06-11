@@ -10,8 +10,8 @@ function PreventToGoPath({ children }: { children: ReactNode }) {
   const auth = useAuth();
 
   useEffect(() => {
-    for (let forb of loggedNotToGo) {
-      if (auth?.isLogged && location.pathname === forb) {
+    for (let prevent of loggedNotToGo) {
+      if (auth?.isLogged && location.pathname === prevent) {
         navigate("/");
       }
     }

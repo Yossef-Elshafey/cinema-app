@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "../../api/users/AuthContext";
 import NonLoggedNav from "./NonLoggedNav";
 import LoggedNav from "./LoggedNav";
+
 function Navbar() {
   const auth = useAuth();
   return (

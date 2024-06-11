@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAuth } from "../../api/users/AuthContext";
 import { myInfo } from "../../api/users/me";
+import { signout } from "../../api/users/signout";
 import { UserInfoRes } from "../../types/Types";
 import { FaHandPaper } from "react-icons/fa";
 import BeforeAction from "../Action";
@@ -10,9 +11,18 @@ function LoggedNav() {
   const [userInfo, setUserInfo] = useState<UserInfoRes>();
   const [displayMenu, setDisplayMenu] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [prompt, setPrompt] = useState(false);
   const auth = useAuth();
+
   const handleClick = () => {
     setDisplayMenu(!displayMenu);
+  };
+
+  const displayPrompt = () => {
+    setPrompt(true);
+    if (displayMenu) {
+      setDisplayMenu(!displayMenu);
+    }
   };
 
   useEffect(() => {
@@ -25,10 +35,27 @@ function LoggedNav() {
     getInfo();
   }, []);
 
+  useEffect(() => {
+    if (accepted) {
+      const logout = async () => {
+        const res = await signout(auth?.tok);
+        if (res === 204) {
+          auth?.logout();
+          // document.location.reload();
+        }
+      };
+      logout();
+    }
+  });
+
   return (
     <>
-      <BeforeAction setAccepted={setAccepted} show={true}>
-        <h2>Hello</h2>
+      <BeforeAction
+        setAccepted={setAccepted}
+        prompt={prompt}
+        setPrompt={setPrompt}
+      >
+        <h2>Do you want to sign out</h2>
       </BeforeAction>
       <div className="relative">
         <div
@@ -48,7 +75,10 @@ function LoggedNav() {
             <li className="p-2 font-bold cursor-pointer hover:underline">
               My info
             </li>
-            <li className="p-2 font-bold cursor-pointer hover:underline">
+            <li
+              className="p-2 font-bold cursor-pointer hover:underline"
+              onClick={displayPrompt}
+            >
               Sign out
             </li>
           </motion.ul>

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useAuth } from "../api/users/AuthContext";
 import { signupCall } from "../api/users/SignUpCall";
-import { getExpiryDate } from "../helpers/useLocalStorage";
 import { SignupData } from "../types/Types";
 
 function Signup() {
   const [formData, setFormData] = useState({} as SignupData);
-  const [cookie, setCookies] = useCookies(["auth_user"]);
+  const auth = useAuth();
   const [error, setError] = useState<any>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,12 +21,7 @@ function Signup() {
     const { data, status } = await signupCall(formData);
 
     if (status === 201) {
-      setCookies("auth_user", data.token, {
-        path: "/",
-        expires: getExpiryDate(2),
-        secure: true,
-        sameSite: "strict",
-      });
+      auth?.login(data.token);
     } else {
       setError(data);
     }

@@ -48,8 +48,9 @@ export interface SignUpRes {
 
 export interface AuthContextType {
   isLogged: boolean;
-  setIsLogged: React.Dispatch<React.SetStateAction<any>>;
   tok: string;
+  logout: () => void;
+  login: (token: string) => void;
 }
 
 export interface UserInfoRes {
@@ -66,5 +67,6 @@ export interface UserInfoRes {
 export interface BeforeActionProps {
   setAccepted: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
-  show: boolean;
+  prompt: boolean;
+  setPrompt: React.Dispatch<React.SetStateAction<boolean>>;
 }
