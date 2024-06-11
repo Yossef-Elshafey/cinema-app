@@ -31,3 +31,40 @@ export interface SeatsProps {
   max: number;
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
+
+export interface SignupData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  password_compare: string;
+}
+
+export interface SignUpRes {
+  id: number;
+  token: string;
+  isAdmin?: boolean;
+}
+
+export interface AuthContextType {
+  isLogged: boolean;
+  setIsLogged: React.Dispatch<React.SetStateAction<any>>;
+  tok: string;
+}
+
+export interface UserInfoRes {
+  // NOTE: this interface doesn't contain all the keys
+  date_joined: string;
+  email: string;
+  first_name: string;
+  id: number;
+  is_staff: boolean;
+  is_superuser: boolean;
+  username: string;
+}
+
+export interface BeforeActionProps {
+  setAccepted: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
+  show: boolean;
+}

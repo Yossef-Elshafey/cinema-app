@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useGetMovies } from "../api/movies/useFetchMovies";
-import GlassyBox from "../component/GlassyBox";
-import Navbar from "../component/Navbar";
+import { useGetMovies } from "../../api/movies/useFetchMovies";
+import GlassyBox from "./GlassyBox";
+import Navbar from "../../component/navbar/Navbar";
 
 function Home() {
   const { movies, loading, setPage } = useGetMovies();

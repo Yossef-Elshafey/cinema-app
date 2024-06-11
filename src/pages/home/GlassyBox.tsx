@@ -1,4 +1,4 @@
-import { GlassyBoxProps } from "../types/Types";
+import { GlassyBoxProps } from "../../types/Types";
 import { motion } from "framer-motion";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";

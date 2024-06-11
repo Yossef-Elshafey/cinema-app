@@ -1,8 +1,9 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLocation } from "react-router";
-import { useSingleMovie } from "../api/movies/useSingleMovie";
-import Seats from "../component/Seats";
-import NotFound from "./NotFound";
+import { useSingleMovie } from "../../api/movies/useSingleMovie";
+import Seats from "./Seats";
+import NotFound from "../NotFound";
 
 function SingleMovie() {
   // NOTE: state is coming from {Link} in GlassyBox.tsx carries the clicked movie id
@@ -13,6 +14,7 @@ function SingleMovie() {
   if (loading) {
     return <div className="text-green-500">Loading...</div>;
   }
+
   if (error) {
     return <NotFound />;
   }
@@ -44,13 +46,18 @@ function SingleMovie() {
       {movie && (
         <>
           <div className="h-screen relative py-8 flex items-center justify-center">
-            <img
+            <motion.img
               src={movie.image}
               alt="some"
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ ease: "easeOut", duration: 1 }}
               className="h-full w-full rounded-md"
             />
             <div className="w-full h-full bg-black/60 backdrop-blur-sm p-4 rounded-md">
-              <h2 className="text-white text-center text-2xl">Select Seats</h2>
+              <h2 className="text-white text-center text-2xl">
+                Choose required seats
+              </h2>
               <Seats max={movie.hall_id.max_seat} handleClick={handleClick} />
             </div>
           </div>

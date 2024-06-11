@@ -29,4 +29,7 @@ body {
   .center-position {
     @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2;
   }
+  .input {
+    @apply block w-full border outline-none bg-transparent rounded-md p-2;
+  }
 }

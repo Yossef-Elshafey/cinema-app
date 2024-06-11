@@ -1,4 +1,5 @@
-import { SeatsProps } from "../types/Types";
+import { SeatsProps } from "../../types/Types";
+import { motion } from "framer-motion";
 
 function Seats({ max, handleClick }: SeatsProps) {
   const columns = 5;
@@ -20,12 +21,15 @@ function Seats({ max, handleClick }: SeatsProps) {
   return (
     <div className="grid grid-cols-5 gap-4 my-auto p-4 rounded-md">
       {seats.map((seat) => (
-        <button
+        <motion.button
           id={seat}
           key={seat}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ ease: "easeInOut", duration: Number(seat[1]) }}
           className="w-full text-white py-6 bg-green-600 mx-auto"
           onClick={handleClick}
-        ></button>
+        ></motion.button>
       ))}
     </div>
   );
