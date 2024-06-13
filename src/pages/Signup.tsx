@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { useAuth } from "../api/users/AuthContext";
 import { signupCall } from "../api/users/SignUpCall";
 import { SignupData } from "../types/Types";
@@ -28,7 +29,13 @@ function Signup() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <motion.form
+      onSubmit={handleSubmit}
+      className="form text-white"
+      animate={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, x: 50 }}
+      transition={{ ease: "easeIn", duration: 1 }}
+    >
       <label className="text-white w-1/2">
         <p className="text-red-500 text-start">{error?.username}</p>
         First Name
@@ -87,7 +94,7 @@ function Signup() {
         value="Submit"
         className="text-white px-4 py-2 w-1/2 rounded border bg-orange-500 cursor-pointer"
       />
-    </form>
+    </motion.form>
   );
 }
 

@@ -4,11 +4,15 @@ import { useLocation } from "react-router";
 import { useSingleMovie } from "../../api/movies/useSingleMovie";
 import Seats from "./Seats";
 import NotFound from "../NotFound";
+import SigninRequired from "../../component/SigninRequired";
 
 function SingleMovie() {
   // NOTE: state is coming from {Link} in GlassyBox.tsx carries the clicked movie id
+  // NOTE: handling any kind of functionallity would be useSingleMovie
+
+  // TODO: end Reservation for auth users
   const { state } = useLocation();
-  const { loading, error, movie } = useSingleMovie(state);
+  const { loading, error, movie, notSignedin } = useSingleMovie(state);
   const [reservedSeats, setReservedSeats] = useState(new Set());
 
   if (loading) {
@@ -16,7 +20,12 @@ function SingleMovie() {
   }
 
   if (error) {
+    // for non exist movie in url path
     return <NotFound />;
+  }
+
+  if (notSignedin) {
+    return <SigninRequired />;
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

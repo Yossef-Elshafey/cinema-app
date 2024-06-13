@@ -7,6 +7,9 @@ import LoggedNav from "./LoggedNav";
 
 function Navbar() {
   const auth = useAuth();
+  // TODO: add Home button if user not at home
+  console.log(document.location.pathname);
+
   return (
     <motion.nav
       initial={{ opacity: 0, y: 100 }}
