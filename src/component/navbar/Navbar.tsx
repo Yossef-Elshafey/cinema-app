@@ -4,11 +4,17 @@ import { motion } from "framer-motion";
 import { useAuth } from "../../api/users/AuthContext";
 import NonLoggedNav from "./NonLoggedNav";
 import LoggedNav from "./LoggedNav";
+import { useEffect, useState } from "react";
 
 function Navbar() {
   const auth = useAuth();
-  // TODO: add Home button if user not at home
-  console.log(document.location.pathname);
+  const [homeNeed, setHomeNeed] = useState(false);
+  useEffect(() => {
+    const path = document.location.pathname;
+    if (path !== "/") {
+      setHomeNeed(true);
+    }
+  }, []);
 
   return (
     <motion.nav
@@ -26,6 +32,11 @@ function Navbar() {
         <Link to="/about" className="signs">
           About us
         </Link>
+        {homeNeed && (
+          <Link to="/" className="signs">
+            Home
+          </Link>
+        )}
       </motion.ul>
       <div className="flex-1 mx-20 my-auto relative">
         <input
