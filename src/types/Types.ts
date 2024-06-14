@@ -28,7 +28,11 @@ export interface GlassyBoxProps {
 }
 
 export interface SeatsProps {
-  max: number;
+  hall: {
+    id: number;
+    name: string;
+    max_seat: number;
+  };
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -51,6 +55,8 @@ export interface AuthContextType {
   tok: string;
   logout: () => void;
   login: (token: string) => void;
+  userId: number | null;
+  setUserId: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export interface UserInfoRes {

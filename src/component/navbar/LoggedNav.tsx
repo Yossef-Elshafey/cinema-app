@@ -30,6 +30,7 @@ function LoggedNav() {
       const data = await myInfo(auth?.tok);
       if (data) {
         setUserInfo(data);
+        auth?.setUserId(data.id);
       }
     };
     getInfo();

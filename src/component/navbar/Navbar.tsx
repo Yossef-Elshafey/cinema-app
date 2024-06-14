@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 function Navbar() {
   const auth = useAuth();
   const [homeNeed, setHomeNeed] = useState(false);
+
   useEffect(() => {
     const path = document.location.pathname;
     if (path !== "/") {
