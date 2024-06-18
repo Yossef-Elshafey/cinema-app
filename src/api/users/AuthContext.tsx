@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLogged(false);
     setTok("");
     setCookie("auth_user", "none", { path: "/", sameSite: "lax" });
+    localStorage.removeItem("isadmin");
   };
 
   return (

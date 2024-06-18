@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Movie } from "../../types/Types";
+import { Movie, ReservationPayload } from "../../types/Types";
 import Seats from "./Seats";
 import Navbar from "../../component/navbar/Navbar";
 import { getSingleMovie } from "../../api/movies/singleMovie";
@@ -9,6 +9,7 @@ import NotFound from "../NotFound";
 import BeforeAction from "../../component/Action";
 import { useAuth } from "../../api/users/AuthContext";
 import { addReservation } from "../../api/movies/sendReservation";
+import SigninRequired from "../../component/SigninRequired";
 
 function SingleMovie() {
   const { state } = useLocation();
@@ -46,10 +47,6 @@ function SingleMovie() {
     setReservedSeats(new Set());
     setAccepted(false);
 
-    // setTimeout(() => {
-    //   set
-    // })
-
     const seatsHolder = document.querySelector(".seats-container");
     const boxes = seatsHolder?.children;
 
@@ -62,6 +59,7 @@ function SingleMovie() {
       });
     }
   };
+
   useEffect(() => {
     // get movie by id send from GlassyBox.tsx button
     const fetchMovie = async () => {
@@ -82,9 +80,9 @@ function SingleMovie() {
     // apply reservation
     const sendRes = async () => {
       if (accepted) {
-        const payload = {
+        const payload: ReservationPayload = {
           movie_id: state,
-          customer: auth?.userId,
+          customer: auth?.userId as number | null,
           num_of_seats: Array.from(reservedSeats).length,
           seat_names: Array.from(reservedSeats).join(","),
         };
@@ -109,7 +107,7 @@ function SingleMovie() {
   }
 
   if (!auth?.isLogged) {
-    return <NotFound />;
+    return <SigninRequired />;
   }
 
   return (

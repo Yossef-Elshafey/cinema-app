@@ -5,10 +5,12 @@ import { useAuth } from "../../api/users/AuthContext";
 import NonLoggedNav from "./NonLoggedNav";
 import LoggedNav from "./LoggedNav";
 import { useEffect, useState } from "react";
+import { useLocalStorage } from "../../helpers/useLocalStorage";
 
 function Navbar() {
   const auth = useAuth();
   const [homeNeed, setHomeNeed] = useState(false);
+  const { getItem } = useLocalStorage("isadmin");
 
   useEffect(() => {
     const path = document.location.pathname;
@@ -33,6 +35,11 @@ function Navbar() {
         <Link to="/about" className="signs">
           About us
         </Link>
+        {getItem("isadmin") && (
+          <Link to="/dashboard" className="signs">
+            Dashboard
+          </Link>
+        )}
         {homeNeed && (
           <Link to="/" className="signs">
             Home

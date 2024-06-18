@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import SingleMovie from "./pages/signleMovie/SingleMovie";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/sign-in" element={<Signin />} />
           <Route path="/movie/:moviename" element={<SingleMovie />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </PreventToGoPath>

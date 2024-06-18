@@ -47,7 +47,7 @@ export interface SignupData {
 export interface SignUpRes {
   id: number;
   token: string;
-  isAdmin?: boolean;
+  admin: boolean;
 }
 
 export interface AuthContextType {
@@ -80,4 +80,11 @@ export interface BeforeActionProps {
 export interface SigninData {
   email: string;
   password: string;
+}
+
+export interface ReservationPayload {
+  movie_id: number;
+  customer: number | null;
+  num_of_seats: number;
+  seat_names: string;
 }

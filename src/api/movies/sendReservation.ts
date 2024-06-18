@@ -1,4 +1,9 @@
-export const addReservation = async (token, payload) => {
+import { ReservationPayload } from "../../types/Types";
+
+export const addReservation = async (
+  token: string | undefined,
+  payload: ReservationPayload,
+) => {
   const url = "http://localhost:8000/api/reservation";
 
   const res = await fetch(url, {

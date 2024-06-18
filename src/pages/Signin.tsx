@@ -4,12 +4,14 @@ import { SigninData } from "../types/Types";
 import { signIn } from "../api/users/signin";
 import { useAuth } from "../api/users/AuthContext";
 import { useNavigate } from "react-router";
+import { useLocalStorage } from "../helpers/useLocalStorage";
 
 function Signin() {
   const [formData, setFormData] = useState({} as SigninData);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const auth = useAuth();
+  const { setItem } = useLocalStorage("isadmin");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,7 +27,13 @@ function Signin() {
 
     if (status === 200) {
       auth?.login(data.token);
-      navigate("/");
+
+      if (data.admin) {
+        navigate("/dashboard");
+        setItem(data.admin);
+      } else {
+        navigate("/");
+      }
     } else {
       setError(true);
     }
