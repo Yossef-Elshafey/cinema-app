@@ -13,6 +13,16 @@ export interface Movie {
   slug: string;
 }
 
+export interface ReservationObj {
+  customer: string;
+  hall: string;
+  id: number;
+  movie_id: string;
+  num_of_seats: number;
+  reserve_date: string;
+  seat_names: string;
+}
+
 export interface MoviesResponse {
   count: number;
   next: string | null;

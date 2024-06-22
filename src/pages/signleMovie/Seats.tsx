@@ -27,7 +27,7 @@ function Seats({ hall, handleClick }: SeatsProps) {
           key={seat}
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ ease: "easeInOut", duration: Number(seat[1]) }}
+          transition={{ ease: "easeInOut", duration: 1.5 }}
           className="w-full text-white py-6 bg-green-600 mx-auto"
           onClick={handleClick}
         ></motion.button>

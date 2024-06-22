@@ -1,4 +1,3 @@
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from "../../api/users/AuthContext";
@@ -35,7 +34,7 @@ function Navbar() {
         <Link to="/about" className="signs">
           About us
         </Link>
-        {getItem("isadmin") && (
+        {getItem("isadmin") && document.location.pathname !== "/dashboard" && (
           <Link to="/dashboard" className="signs">
             Dashboard
           </Link>
@@ -46,13 +45,6 @@ function Navbar() {
           </Link>
         )}
       </motion.ul>
-      <div className="flex-1 mx-20 my-auto relative">
-        <input
-          type="search"
-          className="w-full py-2 focus:outline rounded-xl bg-transparent px-4 "
-        />
-        <FaSearch className="absolute top-1/2 right-10 -translate-y-1/2" />
-      </div>
 
       {!auth?.isLogged ? <NonLoggedNav /> : <LoggedNav />}
     </motion.nav>

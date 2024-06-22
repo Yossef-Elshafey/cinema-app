@@ -8,8 +8,9 @@ import { getSingleMovie } from "../../api/movies/singleMovie";
 import NotFound from "../NotFound";
 import BeforeAction from "../../component/Action";
 import { useAuth } from "../../api/users/AuthContext";
-import { addReservation } from "../../api/movies/sendReservation";
+import { addReservation } from "../../api/reservation/sendReservation";
 import SigninRequired from "../../component/SigninRequired";
+import CallSuccess from "../../component/CallSuccess";
 
 function SingleMovie() {
   const { state } = useLocation();
@@ -17,12 +18,14 @@ function SingleMovie() {
   const [loading, setLoading] = useState(true);
   const [prompt, setPrompt] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [reservedSeats, setReservedSeats] = useState<Set<string>>(new Set());
   const auth = useAuth();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     // toggle colors while boxes(seats) clicked ,
     // add clicked boxes to reservedSeats
+    setSuccess(false);
     const ele = e.target as HTMLButtonElement;
     const seatName = ele.getAttribute("id");
 
@@ -46,7 +49,6 @@ function SingleMovie() {
     // resert states , boxes colors after reservation success
     setReservedSeats(new Set());
     setAccepted(false);
-
     const seatsHolder = document.querySelector(".seats-container");
     const boxes = seatsHolder?.children;
 
@@ -61,7 +63,7 @@ function SingleMovie() {
   };
 
   useEffect(() => {
-    // get movie by id send from GlassyBox.tsx button
+    // get movie by id came from GlassyBox.tsx button
     const fetchMovie = async () => {
       try {
         const data = await getSingleMovie(state);
@@ -90,8 +92,8 @@ function SingleMovie() {
         const { status, data } = await addReservation(auth?.tok, payload);
 
         if (status === 201) {
-          setReservedSeats(new Set());
           resetAfterReservation();
+          setSuccess(true);
         }
       }
     };
@@ -113,6 +115,7 @@ function SingleMovie() {
   return (
     <>
       <Navbar />
+      {success && <CallSuccess />}
       <BeforeAction
         setPrompt={setPrompt}
         setAccepted={setAccepted}

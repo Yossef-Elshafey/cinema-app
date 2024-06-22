@@ -6,12 +6,15 @@ import { signout } from "../../api/users/signout";
 import { UserInfoRes } from "../../types/Types";
 import { FaHandPaper } from "react-icons/fa";
 import BeforeAction from "../Action";
+import { Link } from "react-router-dom";
+import { useLocalStorage } from "../../helpers/useLocalStorage";
 
 function LoggedNav() {
   const [userInfo, setUserInfo] = useState<UserInfoRes>();
   const [displayMenu, setDisplayMenu] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [prompt, setPrompt] = useState(false);
+  const { getItem } = useLocalStorage("isadmin");
   const auth = useAuth();
 
   const handleClick = () => {
@@ -42,7 +45,6 @@ function LoggedNav() {
         const res = await signout(auth?.tok);
         if (res === 204) {
           auth?.logout();
-          // document.location.reload();
         }
       };
       logout();
@@ -73,9 +75,11 @@ function LoggedNav() {
             animate={{ opacity: 0.8, x: 0 }}
             transition={{ ease: "easeOut", duration: 1 }}
           >
-            <li className="p-2 font-bold cursor-pointer hover:underline">
-              My info
-            </li>
+            {!getItem("isadmin") && (
+              <li className="p-2 font-bold cursor-pointer hover:underline">
+                <Link to="/me">My info</Link>
+              </li>
+            )}
             <li
               className="p-2 font-bold cursor-pointer hover:underline"
               onClick={displayPrompt}

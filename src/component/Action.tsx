@@ -26,7 +26,7 @@ function BeforeAction({
     <>
       {prompt && (
         <motion.div
-          className="h-1/6 w-3/4 p-4 backdrop-blur-md center-position pointer-events-auto bg-black z-30"
+          className="h-fit w-3/4 p-4 backdrop-blur-md center-position pointer-events-auto bg-black z-30"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.9 }}
           transition={{ ease: "linear", duration: 1 }}
