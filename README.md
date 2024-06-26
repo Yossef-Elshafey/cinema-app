@@ -12,7 +12,6 @@ Cinema reservation app include users / admin
 
 To get the fronend/backend working properly check <a href="https://github.com/Yossef-Elshafey/tickets-api">API</a>
 
-<p style="border-bottom:0.5px">fetch calls are heading towards localhost from the api mentioned above</p>
 <h2 style="border-bottom: 0.5px solid red; padding:0; margin-bottom:20px;"></h2>
 
 ```
