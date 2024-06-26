@@ -4,11 +4,7 @@ export interface Movie {
   image: string;
   avaliable: boolean; // written wrong
   duration: string;
-  hall_id: {
-    id: number;
-    name: string;
-    max_seat: number;
-  };
+  hall: Hall;
   release_date: string;
   slug: string;
 }
@@ -38,11 +34,7 @@ export interface GlassyBoxProps {
 }
 
 export interface SeatsProps {
-  hall: {
-    id: number;
-    name: string;
-    max_seat: number;
-  };
+  hall: Hall;
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -97,4 +89,18 @@ export interface ReservationPayload {
   customer: number | null;
   num_of_seats: number;
   seat_names: string;
+}
+
+export interface Hall {
+  id: number;
+  name: string;
+  max_seat: number;
+}
+
+export interface AddMoviePayload {
+  name: string;
+  release_date: string;
+  duration: Blob;
+  avaliable: boolean;
+  hall_id: Blob;
 }

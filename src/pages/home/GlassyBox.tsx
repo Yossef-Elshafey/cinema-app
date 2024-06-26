@@ -7,7 +7,7 @@ function GlassyBox({ loading, display, forward, previous }: GlassyBoxProps) {
   return (
     <div className="h-[calc(100vh-7rem)] mt-4">
       <motion.div
-        key={display?.id} // Rerender the component with motion.div animation
+        key={display?.id}
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ease: "easeIn", duration: 1 }}
@@ -34,7 +34,7 @@ function GlassyBox({ loading, display, forward, previous }: GlassyBoxProps) {
             {display?.avaliable ? "Now Available" : "Coming soon"}
           </p>
           <p className="text-yellow-500">Release: {display?.release_date}</p>
-          <p className="text-yellow-500">Hall: {display?.hall_id.name}</p>
+          <p className="text-yellow-500">Hall: {display?.hall.name}</p>
           {display?.avaliable && (
             <Link
               to={`/movie/${display.slug}`}

@@ -5,10 +5,12 @@ import CreateAdminUser from "./CreateAdminUser";
 import ListReservations from "./ListReservations";
 import { useState } from "react";
 import Navbar from "../../component/navbar/Navbar";
+import AddMovie from "./AddMovie";
 
 function Dashboard() {
   const { getItem } = useLocalStorage("isadmin");
   const [displayReservations, setDisplayReservations] = useState(false);
+  const [displayAddMovie, setDisplayAddMovie] = useState(false);
   if (!getItem("isadmin")) {
     return <NotFound />;
   }
@@ -29,10 +31,17 @@ function Dashboard() {
             className="text-xl hover:translate-x-4 transition-all duration-500 cursor-pointer"
             onClick={() => setDisplayReservations(true)}
           >
-            reservations info
+            Reservations info
+          </li>
+          <li
+            className="text-xl hover:translate-x-4 transition-all duration-500 cursor-pointer"
+            onClick={() => setDisplayAddMovie(true)}
+          >
+            Add movie
           </li>
         </motion.ul>
         {displayReservations && <ListReservations />}
+        {displayAddMovie && <AddMovie />}
       </div>
     </>
   );

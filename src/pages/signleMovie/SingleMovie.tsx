@@ -146,9 +146,7 @@ function SingleMovie() {
           <h2 className="text-white text-center text-2xl">
             Choose required seats
           </h2>
-          {movie.hall_id && (
-            <Seats hall={movie.hall_id} handleClick={handleClick} />
-          )}
+          {movie.hall && <Seats hall={movie.hall} handleClick={handleClick} />}
           <button
             className="bg-orange-500 py-2 w-full text-white"
             onClick={() => setPrompt(true)}

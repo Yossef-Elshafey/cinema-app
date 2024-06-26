@@ -5,6 +5,7 @@ import { signIn } from "../api/users/signin";
 import { useAuth } from "../api/users/AuthContext";
 import { useNavigate } from "react-router";
 import { useLocalStorage } from "../helpers/useLocalStorage";
+import Navbar from "../component/navbar/Navbar";
 
 function Signin() {
   const [formData, setFormData] = useState({} as SigninData);
