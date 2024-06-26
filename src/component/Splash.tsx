@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "../helpers/useLocalStorage";
 
 function Splash() {
-  //TODO: customize this
   const { getItem, setItem } = useLocalStorage("visited");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -20,6 +19,7 @@ function Splash() {
     setItem(true);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       {loading && (
