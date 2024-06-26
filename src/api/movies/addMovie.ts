@@ -22,7 +22,6 @@ export const addMovieCall = async (
         Authorization: `Token ${token}`,
       },
     });
-    console.log(payload);
 
     const data = await res.json();
     const status = res.status;

@@ -95,6 +95,8 @@ function AddMovie() {
             name="duration"
             className="input"
             onChange={handleChange}
+            step={0.1}
+            min={0}
             value={String(formData.duration) || ""}
           />
         </label>

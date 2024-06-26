@@ -7,10 +7,29 @@ import { useState } from "react";
 import Navbar from "../../component/navbar/Navbar";
 import AddMovie from "./AddMovie";
 
+interface DisplayObj {
+  [key: string]: boolean;
+}
+
 function Dashboard() {
   const { getItem } = useLocalStorage("isadmin");
-  const [displayReservations, setDisplayReservations] = useState(false);
-  const [displayAddMovie, setDisplayAddMovie] = useState(false);
+
+  const [displays, setDisplays] = useState<DisplayObj>({
+    reservations: false,
+    addMovie: false,
+    createAdmin: false,
+  });
+
+  const handleDisplay = (e: React.MouseEvent<HTMLLIElement>) => {
+    const newDisplays: DisplayObj = {};
+
+    for (let key in displays) {
+      newDisplays[key] = false;
+    }
+
+    const id = e.currentTarget.id;
+    setDisplays({ ...newDisplays, [id]: true });
+  };
   if (!getItem("isadmin")) {
     return <NotFound />;
   }
@@ -29,19 +48,21 @@ function Dashboard() {
 
           <li
             className="text-xl hover:translate-x-4 transition-all duration-500 cursor-pointer"
-            onClick={() => setDisplayReservations(true)}
+            id="reservations"
+            onClick={handleDisplay}
           >
             Reservations info
           </li>
           <li
             className="text-xl hover:translate-x-4 transition-all duration-500 cursor-pointer"
-            onClick={() => setDisplayAddMovie(true)}
+            id="addMovie"
+            onClick={handleDisplay}
           >
             Add movie
           </li>
         </motion.ul>
-        {displayReservations && <ListReservations />}
-        {displayAddMovie && <AddMovie />}
+        {displays.reservations && <ListReservations />}
+        {displays.addMovie && <AddMovie />}
       </div>
     </>
   );
